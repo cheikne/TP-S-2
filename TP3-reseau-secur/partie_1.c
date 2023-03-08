@@ -28,11 +28,6 @@ void affichageBinaire(bit_nombre *nbr){
     int i;
     for(i = 0; i < nbr->x; i++)
         printf("%3d",nbr->nombre[i]);
-    printf("\n");
-    // while(n > 1){
-    //     printf("%d",n%2);
-    //     n = n/2;
-    // }
 }
 
 boolean comparer(bit_nombre *nbr1 , bit_nombre *nbr2){
@@ -47,10 +42,10 @@ boolean comparer(bit_nombre *nbr1 , bit_nombre *nbr2){
 
 boolean estPair(bit_nombre *nbr){
     
-    return nbr->nombre[nbr->x - 1] == 1 ? vrai : faux;
+    return nbr->nombre[nbr->x - 1] == 0 ? vrai : faux;
 }
 
-bit_nombre *diviserPar2(bit_nombre *nbr){
+void diviserPar2(bit_nombre *nbr){
 
     int i;
     for(i = nbr->x-1; i >= 0 ; i--){
@@ -60,23 +55,30 @@ bit_nombre *diviserPar2(bit_nombre *nbr){
         else   
             nbr->nombre[i] = nbr->nombre[i-1];
     }
-
-    return nbr;
+    printf("\t\t\tLe resultat de la division est : ");affichageBinaire(nbr);printf("\n\n");
 }
 
-bit_nombre *reduireDe1(bit_nombre *nbr){
+void reduireDe1(bit_nombre *nbr){
 
-
+    for(int j = nbr->x-2; j >= 0; j--){
+        if(nbr->nombre[j] == 0){
+            nbr->nombre[j] = 1;
+        }
+        else{
+            nbr->nombre[j] = 0;
+            break;;
+        }
+    }
+    printf("\t\t\tLe resultat de la reduction de -1 est : ");affichageBinaire(nbr);printf("\n\n");
 }
 
-bit_nombre *multiplierPar2(bit_nombre *nbr){
+void multiplierPar2(bit_nombre *nbr){
 
     int i;
     for(i = 0; i < nbr->x-1; i++)
         nbr->nombre[i] = nbr->nombre[i+1];
     nbr->nombre[i] = 0;
-
-    return nbr;
+    printf("\t\t\tLe resultat de la multiplication par 2 est : ");affichageBinaire(nbr);printf("\n\n");
 }
 
 void ajouterAB(bit_nombre *nbr1,bit_nombre *nbr2){
@@ -106,7 +108,7 @@ void ajouterAB(bit_nombre *nbr1,bit_nombre *nbr2){
         }
     }
 
-    printf("La somme des deux binaires est : ");
+    printf("La somme de : "); affichageBinaire(nbr1); printf(" et: "); affichageBinaire(nbr2); printf(" est: ");
     for(i = j-1; i >= 0; i--)
         printf("%3d",temp[i]);
     printf("\n");
